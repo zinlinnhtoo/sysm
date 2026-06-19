@@ -45,10 +45,10 @@
 
             <AreaChart fx:id="activeChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="250.0">
                 <xAxis>
-                    <NumberAxis fx:id="xAxis" autoRanging="false" lowerBound="0" minorTickVisible="false" tickLabelsVisible="false" tickMarkVisible="false" upperBound="60" />
+                    <NumberAxis fx:id="xAxis" autoRanging="false" minorTickVisible="false" tickLabelsVisible="false" tickMarkVisible="false" upperBound="60" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis autoRanging="false" lowerBound="0" minorTickVisible="false" tickUnit="25" upperBound="100" />
+                    <NumberAxis autoRanging="false" minorTickVisible="false" tickUnit="25"/>
                 </yAxis>
             </AreaChart>
 

@@ -38,7 +38,7 @@ public class MonitorPresenter {
     @FXML
     public void initialize() {
         activeChart.getData().add(cpuSeries);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateDashboard()));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), _ -> updateDashboard()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         updateDashboard();
@@ -54,10 +54,10 @@ public class MonitorPresenter {
 
         int MAX_HISTORY = 60;
         if (cpuSeries.getData().size() > MAX_HISTORY) {
-            cpuSeries.getData().remove(0);
-            ramSeries.getData().remove(0);
-            batterySeries.getData().remove(0);
-            diskSeries.getData().remove(0);
+            cpuSeries.getData().removeFirst();
+            ramSeries.getData().removeFirst();
+            batterySeries.getData().removeFirst();
+            diskSeries.getData().removeFirst();
         }
 
         xAxis.setLowerBound(timeTick > MAX_HISTORY ? timeTick - MAX_HISTORY : 0);

@@ -9,7 +9,7 @@ public class BatteryMetric extends HardwareMetric {
     public BatteryMetric(List<PowerSource> powerSources) {
         this.name = "System Battery";
         if (!powerSources.isEmpty()) {
-            this.battery = powerSources.get(0);
+            this.battery = powerSources.getFirst();
         }
     }
 

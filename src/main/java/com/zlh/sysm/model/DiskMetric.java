@@ -9,7 +9,7 @@ public class DiskMetric extends HardwareMetric {
     public DiskMetric(List<OSFileStore> fileStores) {
         this.name = "Primary Disk";
         if (!fileStores.isEmpty()) {
-            this.mainDrive = fileStores.get(0);
+            this.mainDrive = fileStores.getFirst();
             this.name = mainDrive.getName();
         }
     }
