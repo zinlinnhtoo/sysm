@@ -5,27 +5,53 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.zlh.sysm.presenter.MonitorPresenter">
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.AreaChart?>
+<BorderPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zlh.sysm.presenter.MonitorPresenter">
 
-    <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
-    </padding>
+    <left>
+        <VBox prefWidth="220.0" spacing="10.0" style="-fx-background-color: #f3f4f6;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
+            </padding>
+            <Label text="Processes" textFill="#6b7280">
+                <font><Font name="System Bold" size="14.0" /></font>
+                <VBox.margin><Insets bottom="10.0" /></VBox.margin>
+            </Label>
 
-    <Label text="System Health Monitor" textFill="#2c3e50">
-        <font>
-            <Font name="System Bold" size="24.0" />
-        </font>
-    </Label>
+            <Button fx:id="navCpuBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#switchViewToCpu" style="-fx-alignment: center-left; -fx-background-color: #e5e7eb; -fx-padding: 10;" text="CPU: 0%" />
+            <Button fx:id="navRamBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#switchViewToRam" style="-fx-alignment: center-left; -fx-background-color: transparent; -fx-padding: 10;" text="Memory: 0%" />
+            <Button fx:id="navBatteryBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#switchViewToBattery" style="-fx-alignment: center-left; -fx-background-color: transparent; -fx-padding: 10;" text="Battery: 0%" />
+            <Button fx:id="navDiskBtn" maxWidth="Infinity" mnemonicParsing="false" onAction="#switchViewToDisk" style="-fx-alignment: center-left; -fx-background-color: transparent; -fx-padding: 10;" text="Disk: 0%" />
+        </VBox>
+    </left>
 
-    <Label fx:id="cpuNameLabel" text="Loading CPU Info..." />
+    <center>
+        <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            </padding>
 
-    <ProgressBar fx:id="cpuBar" prefWidth="300.0" progress="0.0" />
+            <Label fx:id="activeTitleLabel" text="Processor Overview" textFill="#111827">
+                <font><Font name="System Bold" size="28.0" /></font>
+            </Label>
+            <Label fx:id="activeSubtitleLabel" text="Loading hardware details..." textFill="#6b7280" wrapText="true">
+                <font><Font size="14.0" /></font>
+            </Label>
 
-    <Label fx:id="cpuUsageLabel" text="CPU Usage: 0.0%">
-        <font>
-            <Font name="System Bold" size="14.0" />
-        </font>
-    </Label>
+            <Label fx:id="activePercentageLabel" text="0.0%">
+                <font><Font name="System Bold" size="24.0" /></font>
+            </Label>
 
-</VBox>
+            <AreaChart fx:id="activeChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="250.0">
+                <xAxis>
+                    <NumberAxis fx:id="xAxis" autoRanging="false" lowerBound="0" minorTickVisible="false" tickLabelsVisible="false" tickMarkVisible="false" upperBound="60" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis autoRanging="false" lowerBound="0" minorTickVisible="false" tickUnit="25" upperBound="100" />
+                </yAxis>
+            </AreaChart>
+
+        </VBox>
+    </center>
+</BorderPane>

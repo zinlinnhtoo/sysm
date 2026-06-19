@@ -1,25 +1,21 @@
 package com.zlh.sysm.model;
 
-import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 
-public class SystemModel {
+public class CpuMetric extends HardwareMetric {
     private final CentralProcessor processor;
     private long[] previousTicks;
 
-    public SystemModel() {
-        SystemInfo systemInfo = new SystemInfo();
-        this.processor = systemInfo.getHardware().getProcessor();
+    public CpuMetric(CentralProcessor processor) {
+        this.name = processor.getProcessorIdentifier().getName();
+        this.processor = processor;
         this.previousTicks = processor.getSystemCpuLoadTicks();
     }
 
-    public String getCpuName() {
-        return processor.getProcessorIdentifier().getName();
-    }
-
-    public double getCpuUsage() {
+    @Override
+    public double getUsage() {
         double usage = processor.getSystemCpuLoadBetweenTicks(previousTicks);
         previousTicks = processor.getSystemCpuLoadTicks();
-        return usage;
+        return usage * 100;
     }
 }
